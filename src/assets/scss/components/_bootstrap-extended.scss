@@ -1,0 +1,181 @@
+body {
+  font-family: $font-family-sans-serif;
+  background: $bg-mode;
+}
+
+@for $i from 1 through 16 {
+  $s: $i * 50;
+  .width-#{$s} {
+    width: $s + px !important;
+  }
+  .height-#{$s} {
+    height: $s + px !important;
+  }
+}
+
+@for $i from 1 through 3 {
+  .font-medium-#{$i} {
+    font-size: (($i + 6) / 10) + 0rem !important;
+  }
+}
+
+@for $i from 1 through 5 {
+  .font-large-#{$i} {
+    font-size: ($i / 10) + 1rem !important;
+  }
+}
+
+@for $i from 3 through 7 {
+  $s: $i * 100;
+  .font-weight-#{$s} {
+    font-weight: $s !important;
+  }
+}
+
+@for $i from 1 through 2 {
+  .line-height-#{$i} {
+    line-height: $i !important;
+  }
+}
+
+.scrollbar-container {
+  position: relative;
+  height: 100%;
+}
+
+.scroll {
+  padding-right: unset;
+  margin-right: unset;
+  height: 100%;
+}
+
+.ps {
+  position: relative;
+  overflow: hidden !important;
+  overflow-anchor: none;
+  -ms-overflow-style: none;
+  touch-action: auto;
+  -ms-touch-action: auto;
+  &.ps--active-x > .ps__rail-x,
+  &.ps--active-y > .ps__rail-y {
+    display: block;
+    &:focus,
+    &:hover {
+      background-color: #eee;
+    }
+  }
+  .ps__rail-x,
+  .ps__rail-y {
+    display: none;
+    position: absolute;
+    opacity: 0;
+    transition: background-color 0.2s linear, opacity 0.2s linear;
+  }
+  .ps__rail-x {
+    height: 5px;
+    bottom: 0;
+  }
+  .ps__rail-y {
+    width: 5px;
+    right: 0;
+  }
+  .ps__thumb-x,
+  .ps__thumb-y {
+    position: absolute;
+    background-color: $separator-color;
+    border-radius: 5px;
+  }
+  .ps__thumb-x {
+    transition: background-color 0.2s linear, height 0.2s ease-in-out;
+    height: 5px;
+  }
+  .ps__thumb-y {
+    transition: background-color 0.2s linear, width 0.2s ease-in-out;
+    width: 5px;
+  }
+  .ps--focus > .ps__rail-x,
+  .ps--focus > .ps__rail-y,
+  .ps--scrolling-x > .ps__rail-x,
+  .ps--scrolling-y > .ps__rail-y,
+  &:hover > .ps__rail-x,
+  &:hover > .ps__rail-y {
+    opacity: 0.6;
+  }
+  .ps__rail-x.ps--clicking .ps__thumb-x,
+  .ps__rail-x:focus > .ps__thumb-x,
+  .ps__rail-x:hover > .ps__thumb-x {
+    background-color: #999;
+  }
+  .ps__rail-y.ps--clicking .ps__thumb-y,
+  .ps__rail-y:focus > .ps__thumb-y,
+  .ps__rail-y:hover > .ps__thumb-y {
+    background-color: #999;
+  }
+}
+
+.truncate {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.avatar {
+  position: relative;
+  white-space: nowrap;
+  vertical-align: middle;
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  &[class*="avatar-"]::after {
+    content: "";
+    border-radius: 50%;
+    width: 11px;
+    height: 11px;
+    position: absolute;
+    right: -2px;
+    bottom: 0;
+    border: 1px solid $white;
+  }
+  &.avatar-online::after {
+    background-color: $success;
+  }
+  &.avatar-away::after {
+    background-color: $warning;
+  }
+  &.avatar-busy::after {
+    background-color: $danger;
+  }
+  img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border: 0;
+    border-radius: 100%;
+  }
+  &.avatar-lg {
+    img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+  &.avatar-sm {
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+.icon-bg-circle {
+  color: $white;
+  padding: 0.5rem;
+  border-radius: 50%;
+}
+
+.icon-spin {
+  -webkit-animation: spin 1s infinite linear;
+  animation: spin 1s infinite linear;
+}

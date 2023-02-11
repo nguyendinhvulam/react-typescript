@@ -1,0 +1,315 @@
+@font-face {
+  font-family: Rochester;
+  src: url(../../fonts/Rochester-Regular.ttf);
+}
+
+@font-face {
+  font-family: Nunito;
+  src: url(../../fonts/Nunito-Regular.ttf);
+}
+
+// Border settings
+$border-dashed-color: $gray-300 !default; // Custom variable
+
+$btn-extended-variants: true !default; // Custom variable
+
+// Social Network Colors Used With Boostrap Buttons(see: https://brandcolors.net)
+$social-colors: (
+  facebook: (
+    base: #3b5998,
+    inverse: #ffffff,
+    light: rgba(#3b5998, 0.1),
+    active: darken(#3b5998, 7.5%),
+  ),
+  google: (
+    base: #dd4b39,
+    inverse: #ffffff,
+    light: rgba(#dd4b39, 0.1),
+    active: darken(#dd4b39, 7.5%),
+  ),
+  twitter: (
+    base: #1da1f2,
+    inverse: #ffffff,
+    light: rgba(#1da1f2, 0.1),
+    active: darken(#1da1f2, 7.5%),
+  ),
+  instagram: (
+    base: #e1306c,
+    inverse: #ffffff,
+    light: rgba(#e1306c, 0.1),
+    active: darken(#e1306c, 7.5%),
+  ),
+  youtube: (
+    base: #ff0000,
+    inverse: #ffffff,
+    light: rgba(#ff0000, 0.1),
+    active: darken(#ff0000, 7.5%),
+  ),
+  linkedin: (
+    base: #0077b5,
+    inverse: #ffffff,
+    light: rgba(#0077b5, 0.1),
+    active: darken(#0077b5, 7.5%),
+  ),
+) !default; // Custom variable
+
+$header-config: (
+  desktop: (
+    default: (
+      height: 60px,
+      background: $bg-header,
+      box-shadow: (
+        0 1px 15px rgba(0, 0, 0, 0.04),
+        0 1px 6px rgba(0, 0, 0, 0.04),
+      ),
+    ),
+  ),
+  tablet-and-mobile: (
+    default: (
+      height: 40px,
+    ),
+  ),
+) !default;
+
+$aside-config: (
+  desktop: (
+    default: (
+      width: 100px,
+      height: calc(100% - #{get($header-config, desktop, default, height)}),
+      background: $bg-header,
+      box-shadow: (
+        0 3px 30px rgba(0, 0, 0, 0.01),
+        0 3px 20px rgba(0, 0, 0, 0.01),
+      ),
+    ),
+    sub: (
+      width: 230px,
+    ),
+  ),
+  tablet-and-mobile: (
+    default: (),
+  ),
+) !default;
+
+// Spacing
+//
+$spacer: 1rem !default;
+
+$spacers: (
+  0: 0,
+  1: (
+    $spacer * 0.25,
+  ),
+  // 3.5px
+  2:
+    (
+      $spacer * 0.5,
+    ),
+  // 7px;
+  3:
+    (
+      $spacer * 0.75,
+    ),
+  // 10.5px
+  4:
+    (
+      $spacer * 1,
+    ),
+  // 14px
+  5:
+    (
+      $spacer * 1.25,
+    ),
+  // 17.5px
+  6:
+    (
+      $spacer * 1.5,
+    ),
+  // 21px
+  7:
+    (
+      $spacer * 1.75,
+    ),
+  // 24.5px
+  8:
+    (
+      $spacer * 2,
+    ),
+  // 28px
+  9:
+    (
+      $spacer * 2.25,
+    ),
+  // 31.5px
+  10:
+    (
+      $spacer * 2.5,
+    ),
+  // 35px
+  11:
+    (
+      $spacer * 2.75,
+    ),
+  // 38.5px
+  12:
+    (
+      $spacer * 3,
+    ),
+  // 42px
+  13:
+    (
+      $spacer * 3.25,
+    ),
+  // 45.5px
+  14:
+    (
+      $spacer * 3.5,
+    ),
+  // 49px
+  15:
+    (
+      $spacer * 3.75,
+    ),
+  // 52.5px
+  16:
+    (
+      $spacer * 4,
+    ),
+  // 55px
+  17:
+    (
+      $spacer * 4.25,
+    ),
+  // 58.5px
+  18:
+    (
+      $spacer * 4.5,
+    ),
+  // 62px
+  19:
+    (
+      $spacer * 4.75,
+    ),
+  // 65.5px
+  20:
+    (
+      $spacer * 5,
+    ),
+  // 69px
+);
+
+// Links
+//
+// Style anchor elements.
+$link-color: $color-mode !default;
+$link-decoration: none !default;
+$link-hover-color: $primary !default;
+$link-hover-decoration: none !default;
+// Darken percentage for links with `.text-*` class (e.g. `.text-success`)
+$emphasized-link-hover-darken-percentage: 15% !default;
+
+// Paragraphs
+//
+// Style p element.
+$paragraph-margin-bottom: 1rem !default;
+
+// Grid breakpoints
+//
+// Define the minimum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries.
+// scss-docs-start grid-breakpoints
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+) !default;
+// scss-docs-end grid-breakpoints
+
+// Grid containers
+//
+// Define the maximum width of `.container` for different screen sizes.
+
+// scss-docs-start container-max-widths
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px,
+) !default;
+// scss-docs-end container-max-widths
+
+// Grid columns
+//
+// Set the number of columns and specify the width of the gutters.
+
+$grid-columns: 12 !default;
+$grid-gutter-width: 1.5rem !default;
+$grid-row-columns: 6 !default;
+
+$gutters: (
+  0: 0rem,
+  1: (
+    $grid-gutter-width * 0.25,
+  ),
+  // 3.5px
+  2:
+    (
+      $grid-gutter-width * 0.5,
+    ),
+  // 7px;
+  3:
+    (
+      $grid-gutter-width * 0.75,
+    ),
+  // 10.5px
+  4:
+    (
+      $grid-gutter-width * 1,
+    ),
+  // 14px
+  5:
+    (
+      $grid-gutter-width * 1.25,
+    ),
+  // 17.5px
+  6:
+    (
+      $grid-gutter-width * 1.5,
+    ),
+  // 21px
+  7:
+    (
+      $grid-gutter-width * 1.75,
+    ),
+  // 24.5px
+  8:
+    (
+      $grid-gutter-width * 2,
+    ),
+  // 28px
+  9:
+    (
+      $grid-gutter-width * 2.25,
+    ),
+  // 31.5px
+  10:
+    (
+      $grid-gutter-width * 2.5,
+    ),
+  // 35px
+) !default;
+
+// Font family
+
+$font-family-sans-serif: Nunito, Helvetica, "sans-serif" !default; // Poppins, Helvetica, "sans-serif" !default;
+$font-size-base: 0.8125rem !default;
+
+// Border Radiues
+$border-radius-sm: 0.275rem !default;
+$border-radius: 0.475rem !default;
+$border-radius-lg: 0.775rem !default;
+$border-radius-xl: 1rem !default; // Custom variable

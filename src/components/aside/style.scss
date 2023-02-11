@@ -1,0 +1,136 @@
+@import "../../assets/scss/base/config";
+
+#app-container {
+  .aside {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    padding-top: get($header-config, desktop, default, height);
+    z-index: 1199;
+
+    ul li {
+      a {
+        &:hover {
+          svg [fill]:not(.permanent):not(g) {
+            fill: $primary;
+          }
+        }
+      }
+    }
+
+    .main {
+      position: fixed;
+      width: get($aside-config, desktop, default, width);
+      height: get($aside-config, desktop, default, height);
+      background: get($aside-config, desktop, default, background);
+      padding: get($gutters, 2) 0;
+      left: 0;
+      transition: transform 0.3s ease-in-out;
+      z-index: 3;
+
+      ul {
+        li {
+          position: relative;
+          a {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+            border-bottom: 1px solid $gray-100;
+            transition: all 0.3s ease-in-out;
+          }
+          &.active {
+            &::after {
+              content: " ";
+              position: absolute;
+              width: 4px;
+              height: 90px;
+              background: $primary;
+              border-radius: 10px;
+              top: 50%;
+              left: 0;
+              transform: translateY(-50%);
+            }
+            a {
+              color: $primary;
+              svg [fill]:not(.permanent):not(g) {
+                fill: $primary;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .sub {
+      position: fixed;
+      width: get($aside-config, desktop, sub, width);
+      height: get($aside-config, desktop, default, height);
+      background: get($aside-config, desktop, default, background);
+      left: get($aside-config, desktop, default, width);
+      border-left: 1px solid $gray-100;
+      padding: get($gutters, 2) 0;
+      transition: all 0.3s ease-in-out;
+      transform: translateX(-#{get($aside-config, desktop, sub, width)});
+      box-shadow: get($aside-config, desktop, default, box-shadow);
+      z-index: 2;
+
+      ul {
+        display: none;
+        &.active {
+          display: block;
+        }
+        li {
+          margin-left: 30px;
+          position: relative;
+          a {
+            display: flex;
+            align-items: center;
+            padding: get($gutters, 1) 0;
+            margin-bottom: get($gutters, 2);
+          }
+          i {
+            color: $gray-500;
+          }
+        }
+        ul.third-level-menu {
+          display: block;
+          li {
+            a,
+            i {
+              color: $color-mode;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.aside-sub-show {
+    .aside {
+      .sub {
+        transform: translateX(0);
+      }
+    }
+  }
+
+  @media (max-width: get($grid-breakpoints, sm)) {
+    .aside {
+      .main {
+        transform: translateX(-#{get($aside-config, desktop, default, width)});
+      }
+      .sub {
+        transform: translateX(-#{(get($aside-config, desktop, sub, width) + get($aside-config, desktop, default, width))});
+      }
+    }
+    &.aside-show {
+      .main {
+        transform: translateX(0);
+      }
+      .sub {
+        transform: translateX(-#{get($aside-config, desktop, sub, width)});
+      }
+    }
+  }
+}

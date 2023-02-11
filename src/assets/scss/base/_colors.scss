@@ -1,0 +1,285 @@
+$white: #ffffff !default;
+$black: #000000 !default;
+$dark-mode: #1e1e2d !default;
+$dark-mode-bg: #151521 !default;
+$gray-100: #f5f8fa !default;
+$gray-200: #eff2f5 !default;
+$gray-300: #e4e6ef !default;
+$gray-400: #b5b5c3 !default;
+$gray-500: #a1a5b7 !default;
+$gray-600: #7e8299 !default;
+$gray-700: #5e6278 !default;
+$gray-800: #3f4254 !default;
+$gray-900: #181c32 !default;
+$text-muted: $gray-500 !default;
+$color-mode: #3a3a3a !default;
+$bg-mode: #f8f8f8 !default;
+$bg-header: $white !default;
+$separator-color: #d7d7d7 !default;
+
+// Bootstrap gray colors map
+$grays: (
+  "100": $gray-100,
+  "200": $gray-200,
+  "300": $gray-300,
+  "400": $gray-400,
+  "500": $gray-500,
+  "600": $gray-600,
+  "700": $gray-700,
+  "800": $gray-800,
+  "900": $gray-900,
+) !default;
+
+// Bootstrap custom colors
+$blue: #009ef6 !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #d63384 !default;
+$red: #dc3545 !default;
+$orange: #fd7e14 !default;
+$yellow: #ffc107 !default;
+$green: #198754 !default;
+$teal: #20c997 !default;
+$cyan: #0dcaf0 !default;
+
+// Bootstrap contextual colors
+// Dark colors
+$dark: $gray-900 !default;
+$dark-active: darken($gray-900, 3%) !default;
+$dark-light: $gray-200 !default;
+$dark-inverse: $white !default;
+
+// Primary colors
+// $primary: #3699ff !default;
+// $primary-active: #187de4 !default;
+$primary: #ed7117 !default;
+$primary-active: #cb5f10 !default;
+$primary-light: #f1faff !default;
+$primary-inverse: $white !default;
+
+// Secondary colors
+$secondary: $gray-300 !default;
+$secondary-active: $gray-400 !default;
+$secondary-light: $gray-100 !default;
+$secondary-inverse: $gray-800 !default;
+
+// Light colors
+$light: $gray-100 !default;
+$light-active: $gray-300 !default;
+$light-inverse: $gray-600 !default;
+$lighten: rgba($light, 0.5);
+
+// Success colors
+$success: #1bc5bd !default;
+$success-active: #0bb7af !default;
+$success-light: #c9f7f5 !default;
+$success-inverse: $white !default;
+
+// Inco colors
+$info: #8950fc !default;
+$info-active: #7337ee !default;
+$info-light: #eee5ff !default;
+$info-inverse: $white !default;
+
+// Warning colors
+$warning: #ffa800 !default;
+$warning-active: #ee9d01 !default;
+$warning-light: #fff4de !default;
+$warning-inverse: $white !default;
+
+// Danger colors
+$danger: #f64e60 !default;
+$danger-active: #ee2d41 !default;
+$danger-light: #ffe2e5 !default;
+$danger-inverse: $white !default;
+
+// White colors
+$white: $white !default;
+$white-active: $gray-100 !default;
+$white-inverse: $gray-600 !default;
+
+// Bootstrap colors map
+$colors: (
+  "blue": $blue,
+  "indigo": $indigo,
+  "purple": $purple,
+  "pink": $pink,
+  "red": $red,
+  "orange": $orange,
+  "yellow": $yellow,
+  "green": $green,
+  "teal": $teal,
+  "cyan": $cyan,
+  "gray": $gray-600,
+  "gray-dark": $gray-800,
+) !default;
+
+// Theme colors
+$theme-colors: (
+  "white": $white,
+  "light": $light,
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "dark": $dark,
+) !default;
+
+// Hover colors
+$theme-active-colors: (
+  "white": $white-active,
+  "primary": $primary-active,
+  "secondary": $secondary-active,
+  "light": $light-active,
+  "success": $success-active,
+  "info": $info-active,
+  "warning": $warning-active,
+  "danger": $danger-active,
+  "dark": $dark-active,
+) !default;
+
+// Inverse colors
+$theme-inverse-colors: (
+  "white": $white-inverse,
+  "primary": $primary-inverse,
+  "secondary": $secondary-inverse,
+  "light": $light-inverse,
+  "success": $success-inverse,
+  "info": $info-inverse,
+  "warning": $warning-inverse,
+  "danger": $danger-inverse,
+  "dark": $dark-inverse,
+) !default;
+
+// Light colors
+$theme-light-colors: (
+  "primary": $primary-light,
+  "success": $success-light,
+  "info": $info-light,
+  "warning": $warning-light,
+  "danger": $danger-light,
+  "dark": $dark-light,
+) !default;
+
+// Text colors
+$theme-text-colors: (
+  "white": $white,
+  "primary": $primary,
+  "secondary": $secondary,
+  "light": $light,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "dark": $dark,
+  "muted": $text-muted,
+  "gray-100": $gray-100,
+  "gray-200": $gray-200,
+  "gray-300": $gray-300,
+  "gray-400": $gray-400,
+  "gray-500": $gray-500,
+  "gray-600": $gray-600,
+  "gray-700": $gray-700,
+  "gray-800": $gray-800,
+  "gray-900": $gray-900,
+) !default;
+
+$colors-custom: (
+  "primary": $primary,
+  "danger": $danger,
+  "warning": $warning,
+  "success": $success,
+  "info": $info,
+  "blue": $blue,
+  "indigo": $indigo,
+  "purple": $purple,
+  "pink": $pink,
+  "red": $red,
+  "orange": $orange,
+  "yellow": $yellow,
+  "green": $green,
+  "teal": $teal,
+  "cyan": $cyan,
+  "gray": $gray-600
+);
+
+@each $key, $value in $colors-custom {
+  .bg-#{$key} {
+    background-color: $value !important;
+  }
+
+  .text-#{$key} {
+    color: $value !important;
+  }
+
+  .badge-#{$key} {
+    background-color: $value !important;
+  }
+
+  .btn-outline-#{$key} {
+    border-color: $value;
+    color: $value;
+    &:hover {
+      background-color: $value;
+      color: $white;
+    }
+  }
+
+  .bg-gradient-x-#{$key} {
+    background-image: -webkit-linear-gradient(left, darken($value, 10%) 0, lighten($value, 10%) 100%);
+    background-image: linear-gradient(to right, darken($value, 10%) 0, lighten($value, 10%) 100%);
+    background-repeat: repeat-x;
+  }
+  .bg-gradient-y-#{$key} {
+    background-image: -webkit-linear-gradient(top, darken($value, 10%) 0, lighten($value, 10%) 100%);
+    background-image: linear-gradient(to bottom, darken($value, 10%) 0, lighten($value, 10%) 100%);
+    background-repeat: repeat-x;
+  }
+  .bg-gradient-directional-#{$key} {
+    background-image: -webkit-linear-gradient(45deg, darken($value, 10%), lighten($value, 10%));
+    background-image: linear-gradient(45deg, darken($value, 10%), lighten($value, 10%));
+    background-repeat: repeat-x;
+  }
+  .bg-gradient-radial-#{$key} {
+    background-image: -webkit-radial-gradient(circle, darken($value, 10%), lighten($value, 10%));
+    background-image: radial-gradient(circle, darken($value, 10%), lighten($value, 10%));
+    background-repeat: no-repeat;
+  }
+  .bg-gradient-striped-#{$key} {
+    background-image: -webkit-linear-gradient(
+      45deg,
+      lighten($value, 15%) 25%,
+      transparent 25%,
+      transparent 50%,
+      lighten($value, 15%) 50%,
+      lighten($value, 15%) 75%,
+      transparent 75%,
+      transparent
+    );
+    background-image: linear-gradient(
+      45deg,
+      lighten($value, 15%) 25%,
+      transparent 25%,
+      transparent 50%,
+      lighten($value, 15%) 50%,
+      lighten($value, 15%) 75%,
+      transparent 75%,
+      transparent
+    );
+  }
+
+  @for $i from 5 through 20 {
+    @if $i % 5 == 0 {
+      $percentage: $i * 1%;
+
+      .bg-#{$key}.bg-darken-#{$i} {
+        background-color: darken($value, $percentage) !important;
+      }
+      .bg-#{$key}.bg-lighten-#{$i} {
+        background-color: lighten($value, $percentage) !important;
+      }
+    }
+  }
+}

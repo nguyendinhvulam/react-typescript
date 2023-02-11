@@ -1,0 +1,26 @@
+.animation {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.animation-slide-in-down {
+  animation-name: slideInDown;
+}
+
+.animation-slide-in-up {
+  animation-name: slideInUp;
+}
+
+.animation-fade-in {
+  animation-name: fadeIn;
+}
+
+.animation-fade-out {
+  animation-name: fadeOut;
+}
+
+.animation-blink {
+  animation: blink 1s steps(5, start) infinite;
+}
+
+

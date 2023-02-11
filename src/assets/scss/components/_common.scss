@@ -1,0 +1,12 @@
+@import "../base/config";
+
+main {
+  margin-top: get($header-config, desktop, default, height);
+  transition: all 0.3s ease-in-out;
+}
+
+@media (min-width: get($grid-breakpoints, sm)) {
+  main {
+    margin-left: get($aside-config, desktop, default, width);
+  }
+}

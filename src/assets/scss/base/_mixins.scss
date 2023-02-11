@@ -1,0 +1,136 @@
+@mixin placeholder($color) {
+  &::placeholder {
+    color: $color;
+  }
+
+  &::-moz-placeholder {
+    color: $color;
+    opacity: 1;
+  }
+}
+
+@mixin button-reset() {
+  appearance: none;
+  box-shadow: none;
+  border-radius: 0;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  outline: none;
+  margin: 0;
+  padding: 0;
+}
+
+@mixin input-reset() {
+  border: 0;
+  background-color: transparent;
+  outline: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+// SVG
+@mixin svg-icon-color($color, $important: false) {
+  svg {
+    [fill]:not(.permanent):not(g) {
+      transition: fill 0.3s ease;
+      fill: $color valueif($important, !important, null);
+    }
+
+    &:hover {
+      [fill]:not(.permanent):not(g) {
+        transition: fill 0.3s ease;
+      }
+    }
+  }
+}
+
+@mixin svg-icon-transition() {
+  svg {
+    [fill]:not(g) {
+      transition: fill 0.3s ease;
+    }
+  }
+}
+
+@mixin svg-icon-size($size, $important: false) {
+  svg {
+    height: $size valueif($important, !important, null);
+    width: $size valueif($important, !important, null);
+  }
+}
+
+//
+// Button Mixins
+//
+@mixin button-custom-variant(
+  $color,
+  $icon-color,
+  $border-color,
+  $bg-color,
+  $color-active,
+  $icon-color-active,
+  $border-color-active,
+  $bg-color-active
+) {
+  @if ($color != null) {
+    color: $color;
+  }
+
+  @if ($icon-color != null) {
+    i {
+      color: $icon-color;
+    }
+
+    .svg-icon {
+      @include svg-icon-color($icon-color);
+    }
+
+    &.dropdown-toggle:after {
+      color: $icon-color;
+    }
+  }
+
+  @if ($border-color != null) {
+    border-color: $border-color;
+  }
+
+  @if ($bg-color != null) {
+    background-color: $bg-color;
+  }
+
+  .btn-check:checked + &,
+  .btn-check:active + &,
+  &:focus:not(.btn-active),
+  &:hover:not(.btn-active),
+  &:active:not(.btn-active),
+  &.active,
+  &.show,
+  .show > & {
+    @if ($color-active != null) {
+      color: $color-active;
+    }
+
+    @if ($icon-color-active != null) {
+      i {
+        color: $icon-color-active;
+      }
+
+      .svg-icon {
+        @include svg-icon-color($icon-color-active);
+      }
+
+      &.dropdown-toggle:after {
+        color: $icon-color-active;
+      }
+    }
+
+    @if ($border-color-active != null) {
+      border-color: $border-color-active;
+    }
+
+    @if ($bg-color-active != null) {
+      background-color: $bg-color-active !important;
+    }
+  }
+}

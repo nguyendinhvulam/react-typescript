@@ -1,0 +1,123 @@
+@import "../../assets/scss/base/config";
+
+.navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+  height: get($header-config, desktop, default, height);
+  background: get($header-config, desktop, default, background);
+  box-shadow: get($header-config, desktop, default, box-shadow);
+
+  .brand {
+    flex-basis: get($aside-config, desktop, default, width);
+    padding: 0 get($gutters, 2);
+    &-text {
+      font-family: Rochester;
+      font-size: 26px;
+      font-weight: bold;
+      color: $primary;
+      text-decoration: none;
+    }
+    &-img {
+      width: auto;
+      height: 44px;
+    }
+  }
+
+  &-widget {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 0 get($gutters, 2);
+    .dropdown {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &.new-announcement::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        width: 6px;
+        height: 6px;
+        border-radius: 100%;
+        background-color: $success;
+        animation: blink 1s steps(5, start) infinite;
+      }
+      &.user-dropdown {
+        img {
+          width: auto;
+          height: 40px;
+          border-radius: 6px;
+        }
+      }
+      &-menu {
+        border: none;
+        border-radius: 6px;
+        inset: 100% 0 auto auto !important;
+        transition: all 0.2s linear;
+        box-shadow: 0 5px 25px rgba(34, 41, 47, 0.1);
+        animation-duration: 0.3s;
+        animation-fill-mode: both;
+        animation-name: slideIn;
+        &.dropdown-menu-media {
+          width: 340px;
+        }
+      }
+
+      &.mega-dropdown {
+        position: static;
+        .mega-dropdown-menu {
+          --gutters: get($gutters, 2);
+          padding: 1rem;
+          width: calc(100% - (0.75rem * 2));
+          margin: 0 get($gutters, 2);
+          z-index: 9999;
+          &.show {
+            display: flex;
+          }
+          .bg-mega {
+            background-image: linear-gradient(to right, $primary, mix($black, $primary, 70%));
+            padding: 1.5rem;
+            border-radius: $border-radius;
+          }
+          ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            li {
+              a {
+                display: block;
+                color: $black;
+                &:hover {
+                  color: $primary;
+                }
+              }
+            }
+          }
+        }
+      }
+      & > button {
+        &,
+        &:focus,
+        &:active {
+          border: none;
+        }
+        i {
+          line-height: 2;
+          padding: 0;
+        }
+      }
+    }
+  }
+}
+@media (max-width: (get($grid-breakpoints, sm) - 1px)) {
+  .navbar {
+    & > * > :not(.brand) {
+      flex-basis: 50% !important;
+    }
+  }
+}
