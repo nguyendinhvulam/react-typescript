@@ -8,6 +8,9 @@
   src: url(../../fonts/Nunito-Regular.ttf);
 }
 
+$animation-time-long: 1000ms;
+$animation-time-short: 200ms;
+
 // Border settings
 $border-dashed-color: $gray-300 !default; // Custom variable
 
@@ -313,3 +316,12 @@ $border-radius-sm: 0.275rem !default;
 $border-radius: 0.475rem !default;
 $border-radius-lg: 0.775rem !default;
 $border-radius-xl: 1rem !default; // Custom variable
+
+// Custom scrollbar
+$scrollbar: (
+  space: 0.25rem,
+  width: 0.4rem,
+  height: 0.4rem,
+  color: $gray-200,
+  hover-color: darken($gray-200, 2%),
+) !default;

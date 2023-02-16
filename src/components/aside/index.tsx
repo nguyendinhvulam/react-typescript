@@ -1,7 +1,7 @@
 import { MouseEvent, useContext, useEffect, useRef, useState } from 'react'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import { NavLink, useLocation } from 'react-router-dom'
-import { UncontrolledCollapse, Nav, NavItem } from 'reactstrap'
+import { Nav, NavItem, Collapse } from 'reactstrap'
 
 import IntlMessages from 'src/helpers/IntlMessages'
 import svg from "src/components/svg"
@@ -11,8 +11,8 @@ import './style.scss'
 import { AsideContext } from 'src/context/AsideContext'
 
 interface AsideStateProps {
-  selected: string | null | undefined;
-  viewing: string | null | undefined;
+  selected: string | null | undefined,
+  viewing: string | null | undefined
 }
 
 type Subs = {
@@ -21,13 +21,6 @@ type Subs = {
   to: string,
   icon?: string,
   newTab?: boolean
-}
-
-type SubItemType = {
-  label: string,
-  icon: string,
-  to: string,
-  newTab?: boolean,
 }
 
 interface MenuItemProps {
@@ -39,15 +32,6 @@ interface MenuItemProps {
   newTab?: boolean
 }
 
-interface SubMenuItemProps {
-  slug: string,
-  label: string,
-  to: string,
-  icon?: string,
-  subs?: SubItemType[],
-  newTab?: boolean,
-}
-
 const Aside = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const location = useLocation()
@@ -56,6 +40,7 @@ const Aside = () => {
     selected: '',
     viewing: ''
   })
+  const [collapsedMenus, setCollapsedMenus] = useState<string[]>([])
 
   useEffect(() => {
     addEvents()
@@ -99,9 +84,9 @@ const Aside = () => {
 
   const resetSelectedOldActive = () => {
     const oldActive = document.querySelector('.sub li.active')
-    if (oldActive !== null) oldActive.classList.remove('active')
+    oldActive?.classList.remove('active')
     const oldSubActive = document.querySelector('.third-level-menu li.active')
-    if (oldSubActive !== null) oldSubActive.classList.remove('active')
+    oldSubActive?.classList.remove('active')
   }
 
   const setSelectedActive = () => {
@@ -125,7 +110,7 @@ const Aside = () => {
     }
   }
 
-  const menuItemClick = (e: MouseEvent<HTMLElement>, menuItem: MenuItemProps | SubMenuItemProps) => {
+  const menuItemClick = (e: MouseEvent<HTMLElement>, menuItem: MenuItemProps) => {
     const selectedParent = menuItem.slug
     const selectedHasParent = e.currentTarget.closest('ul[data-parent]')
     const selectedHasSub = menuItem.subs && menuItem.subs.length > 0
@@ -153,7 +138,19 @@ const Aside = () => {
     })
   }
 
-  const renderMenuLink = (menuItem: MenuItemProps | SubMenuItemProps) => {
+  const toggleMenuCollapse = (e: MouseEvent, key: string) => {
+    e.preventDefault()
+    let collapsedItems: string[] = [...collapsedMenus]
+    const index = collapsedItems.indexOf(key)
+    if (index === -1) {
+      collapsedItems.push(key)
+    } else {
+      collapsedItems.splice(index, 1)
+    }
+    setCollapsedMenus(collapsedItems)
+  }
+
+  const renderMenuLink = (menuItem: MenuItemProps) => {
     return (
       menuItem.newTab ?
         <a
@@ -180,7 +177,7 @@ const Aside = () => {
     return (
       <NavItem
         key={menuItem.slug}
-        className={((asideState.selected === menuItem.slug && asideState.viewing === '') || asideState.viewing === menuItem.slug) ? 'active' : ''}
+        className={(asideState.selected === menuItem.slug && asideState.viewing === '') || asideState.viewing === menuItem.slug ? 'active' : ''}
       >
         {renderMenuLink(menuItem)}
       </NavItem>
@@ -192,7 +189,7 @@ const Aside = () => {
       <Nav
         key={menuItem.slug}
         data-parent={menuItem.slug}
-        className={(asideState.selected === menuItem.slug && asideState.viewing === '') || asideState.viewing === menuItem.slug ? 'active' : ''}
+        className={(asideState.selected === menuItem.slug && asideState.viewing === '') || asideState.viewing === menuItem.slug ? 'd-block' : ''}
       >
         {
           menuItem.subs && menuItem.subs.map((sub: MenuItemProps, idx: number) => {
@@ -213,17 +210,17 @@ const Aside = () => {
                   : sub.subs && sub.subs.length > 0 ?
                     <>
                       <NavLink
-                        className={`rotate-arrow-icon opacity-50`}
+                        className={`rotate-arrow-icon opacity-50 ${collapsedMenus.indexOf(`${menuItem.slug}_${idx}`) !== -1 && 'collapsed'}`}
                         to={sub.to}
                         id={`${menuItem.slug}_${idx}`}
-                        onClick={(e) => { }}
+                        onClick={(e) => toggleMenuCollapse(e, `${menuItem.slug}_${idx}`)}
                       >
                         <i className="simple-icon-arrow-down font-large-1 me-2" />
                         <IntlMessages id={sub.label} />
                       </NavLink>
-                      <UncontrolledCollapse toggler={`${menuItem.slug}_${idx}`} defaultOpen={true}>
+                      <Collapse isOpen={collapsedMenus.indexOf(`${menuItem.slug}_${idx}`) === -1}>
                         <Nav className="third-level-menu">
-                          {sub.subs.map((thirdSub: SubMenuItemProps, thirdIdx: number) => {
+                          {sub.subs.map((thirdSub: MenuItemProps, thirdIdx: number) => {
                             return (
                               <NavItem key={`${menuItem.slug}_${idx}_${thirdIdx}`}>
                                 {renderMenuLink(thirdSub)}
@@ -231,7 +228,7 @@ const Aside = () => {
                             )
                           })}
                         </Nav>
-                      </UncontrolledCollapse>
+                      </Collapse>
                     </>
                     :
                     <NavLink to={sub.to}>

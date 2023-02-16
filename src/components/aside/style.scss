@@ -103,6 +103,17 @@
             }
           }
         }
+        .rotate-arrow-icon {
+          i {
+            transition: transform $animation-time-short;
+            transform: rotate(0);
+          }
+          &.collapsed {
+            i {
+              transform: rotate(-90deg);
+            }
+          }
+        }
       }
     }
   }

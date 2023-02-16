@@ -1,7 +1,24 @@
+import { useEffect, useState } from "react"
 import { Link } from 'react-router-dom'
 import { Table } from 'reactstrap'
+import { getUserList } from 'src/services/api/User.api'
 
 const UserList = () => {
+  const [usersList, setUsersList] = useState([])
+
+  const fetchUserList = async () => {
+    const response = getUserList('en/news/')
+    console.log(response)
+    // const responseJSON = await response.json
+    // if (responseJSON) {
+    //   setUsersList(response.data)
+    // }
+  }
+
+  useEffect(() => {
+    fetchUserList()
+  }, [])
+
   return (
     <div>
       <h1>User List</h1>
