@@ -1,7 +1,7 @@
 import { createAPI } from "./Rest"
 
 export const config = {
-  apiEndpoint: 'http://127.0.0.1:8000'
+  apiEndpoint: 'https://laravel.local:8443/api'
 }
 
 export const getAccessToken = () => {

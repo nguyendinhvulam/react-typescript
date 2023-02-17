@@ -1,3 +1,6 @@
+import { deepmerge } from "deepmerge-ts"
+import urlcat from 'urlcat'
+
 type Options = {
   baseUrl: string,
   acquireAccessToken?: () => string | undefined,
@@ -12,13 +15,13 @@ export enum ContentType {
   FormUrlEncoded = "application/x-www-form-urlencoded"
 }
 
+export const acceptKey = "Accept"
 export const contentTypeKey = "Content-Type"
 
 const buildQueryString = <P extends Record<string, any>>(prefix: string, resource: string | [string, P]) => {
   const endpoint = Array.isArray(resource) ? resource[0] : resource
   const params = Array.isArray(resource) ? resource[1] : undefined
-  return `${prefix}/${endpoint}`
-  // return urlcat(prefix, endpoint, params || {})
+  return urlcat(prefix, endpoint, params || {})
 }
 
 const getBody = (contentType: string = ContentType.Json, body?: null) => {
@@ -49,28 +52,30 @@ const defaultOpts: Options = {
 }
 
 export const createAPI = (initOpts: Partial<Options> = {}) => {
-  const { baseUrl, authorizationHeader, authorizationMethod } = { ...defaultOpts, ...initOpts } as Options
+  const { baseUrl, authorizationHeader, authorizationMethod } = deepmerge(defaultOpts, initOpts) as Options
 
   async function request<P extends Record<string, any>>(resource: string | [string, P], options?: RequestInit): Promise<undefined> {
     let token
 
-    let requestInit = { ...initOpts.requestInit, ...options }
-
     if (initOpts.acquireAccessToken) {
       token = initOpts.acquireAccessToken()
-      if (token) {
-        requestInit = {
-          ...requestInit,
-          ...{
-            headers: {
-              [authorizationHeader]: `${authorizationMethod} ${token}`.trim(),
-            }
-          }
-        }
-      }
     }
 
+    const requestInit = deepmerge(
+      initOpts.requestInit,
+      token && {
+        headers: {
+          [authorizationHeader]: `${authorizationMethod} ${token}`.trim(),
+        },
+      },
+      options
+    )
+
     const headers = new Headers(requestInit?.headers)
+
+    if (!headers.has(acceptKey)) {
+      headers.set(acceptKey, ContentType.Json)
+    }
 
     if (!headers.has(contentTypeKey)) {
       headers.set(contentTypeKey, ContentType.Json)
@@ -90,99 +95,109 @@ export const createAPI = (initOpts: Partial<Options> = {}) => {
         ...requestInit,
         headers,
         body,
+      }).then(async (response) => {
+        if (response.status < 400) {
+          return resolve(
+            response.status === 204 ? undefined : await response.json()
+          )
+        }
+        const error = await response.json()
+        if (error) {
+          return reject(error)
+        }
+        if (error.status >= 400 && error.status < 500 && error.message) {
+          throw new Error(error.status, error.message)
+        } else {
+          throw new Error(error.status, response.statusText as any)
+        }
+      }).catch((error) => {
+        reject(new Error(error.status || 500, error.message))
       })
-        .then(async (response) => {
-          if (response.status < 400) {
-            return resolve(
-              response.status === 204 ? undefined : await response.json()
-            )
-          }
-          const error = await response.json()
-          if (error) {
-            return reject(error)
-          }
-          if (error.status >= 400 && error.status < 500 && error.message) {
-            throw new Error(error.status, error.message)
-          } else {
-            throw new Error(error.status, response.statusText as any)
-          }
-        })
-        .catch((error) => {
-          reject(new Error(error.status || 500, error.message))
-        })
     )
   }
 
   return {
     request,
 
-    async get<R, P extends Record<string, any> = Record<string, any>>(resource: string | [string, P], options?: RequestInit) {
-      return request(resource, { ...options, ...{ method: "GET" } })
-    },
-
-    async post<R, T = unknown, P extends Record<string, any> = Record<string, any>>(resource: string | [string, P], body?: T, options?: RequestInit) {
+    async get<P extends Record<string, any> = Record<string, any>>(resource: string | [string, P], options?: RequestInit) {
       return request(
         resource,
-        {
-          ...options,
-          ...{
+        deepmerge(
+          options,
+          {
+            method: "GET"
+          }
+        )
+      )
+    },
+
+    async post<T = unknown, P extends Record<string, any> = Record<string, any>>(resource: string | [string, P], body?: T, options?: RequestInit) {
+      return request(
+        resource,
+        deepmerge(
+          options,
+          {
             method: "POST",
-            body: body as any,
+            body: body as any
           }
-        }
+        )
       )
     },
 
-    async put<R, T = unknown, P extends Record<string, any> = Record<string, any>>(resource: string | [string, P], body?: T, options?: RequestInit) {
+    async put<T = unknown, P extends Record<string, any> = Record<string, any>>(resource: string | [string, P], body?: T, options?: RequestInit) {
       return request(
         resource,
-        {
-          ...options,
-          ...{
+        deepmerge(
+          options,
+          {
             method: "PUT",
-            body: body as any,
+            body: body as any
           }
-        }
+        )
       )
     },
 
-    async patch<R, T = unknown, P extends Record<string, any> = Record<string, any>>(resource: string | [string, P], body?: T, options?: RequestInit) {
+    async patch<T = unknown, P extends Record<string, any> = Record<string, any>>(resource: string | [string, P], body?: T, options?: RequestInit) {
       return request(
         resource,
-        {
-          ...options,
-          ...{
+        deepmerge(
+          options,
+          {
             method: "PATCH",
-            body: body as any,
+            body: body as any
           }
-        }
+        )
       )
     },
 
-    async delete<R, P extends Record<string, any> = Record<string, any>>(resource: string | [string, P], options?: RequestInit) {
+    async delete<P extends Record<string, any> = Record<string, any>>(resource: string | [string, P], options?: RequestInit) {
       return request(
         resource,
-        {
-          ...options, ...{
-            method: "DELETE",
+        deepmerge(
+          options,
+          {
+            method: "DELETE"
           }
-        }
+        )
       )
     },
 
-    async upload<R, T = unknown, P extends Record<string, any> = Record<string, any>>(resource: string | [string, P], body?: T, options?: RequestInit) {
+    async upload<T = unknown, P extends Record<string, any> = Record<string, any>>(resource: string | [string, P], body?: T, options?: RequestInit) {
       if (!body) {
         return Promise.reject(new Error("Upload body is empty"))
       }
 
-      return this.put<R>(resource, body, {
-        ...options,
-        ...{
-          headers: {
-            [contentTypeKey]: ContentType.Multipart,
-          },
-        }
-      }
+      return this.put(
+        resource,
+        body,
+        deepmerge(
+          options,
+          {
+            headers: {
+              [contentTypeKey]: ContentType.Multipart
+            }
+          }
+        )
       )
     },
   }

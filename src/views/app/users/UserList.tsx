@@ -3,16 +3,23 @@ import { Link } from 'react-router-dom'
 import { Table } from 'reactstrap'
 import { getUserList } from 'src/services/api/User.api'
 
+type User = {
+  title: string,
+  slug: string,
+  excerpt: string
+}
+
 const UserList = () => {
   const [usersList, setUsersList] = useState([])
 
   const fetchUserList = async () => {
-    const response = getUserList('en/news/')
-    console.log(response)
-    // const responseJSON = await response.json
-    // if (responseJSON) {
-    //   setUsersList(response.data)
-    // }
+    const response = getUserList('news')
+    response.then(result => {
+      const { data }: any = result
+      setUsersList(data)
+    }).catch(error => {
+      console.log('An Error Occured')
+    })
   }
 
   useEffect(() => {
@@ -32,24 +39,16 @@ const UserList = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td><Link to='1'>Mark</Link></td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td><Link to='2'>Jacob</Link></td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td><Link to='3'>Larry</Link></td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr>
+          {
+            usersList.map((item: User, idx) => (
+              <tr>
+                <th scope="row">{idx + 1}</th>
+                <td><Link to='1'>{item?.title}</Link></td>
+                <td>{item?.slug}</td>
+                <td>{item?.excerpt}</td>
+              </tr>
+            ))
+          }
         </tbody>
       </Table>
     </div>

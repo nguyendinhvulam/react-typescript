@@ -1,7 +1,7 @@
 import { publicApi } from '../base/BaseApi'
 
 export const getUserList = async (requestUrl: string) => {
-  return publicApi.post([requestUrl, {}])
+  return publicApi.get([requestUrl, {}])
 }
 
 export const getUser = async (requestUrl: string, payload = {}) => {
