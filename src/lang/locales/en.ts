@@ -1,4 +1,10 @@
-module.exports = {
+export default {
+  'nav.home': 'Home',
+  'nav.dashboard': 'Dashboard',
+  'nav.ui': 'UI',
+  'nav.icons': 'Icons',
+
+
   'aside.home': 'Home',
   'aside.dashboards': 'Dashboards',
   'aside.ui': 'UI',

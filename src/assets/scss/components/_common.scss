@@ -1,4 +1,107 @@
 @import "../base/config";
+@import "../base/root";
+
+.text {
+  &-default {
+    color: $primary-color !important;
+  }
+  &-xlarge {
+    font-size: 2.7rem !important;
+  }
+  &-large {
+    font-size: 1.9rem !important;
+  }
+  &-one {
+    font-size: 1rem !important;
+  }
+  &-small {
+    font-size: 0.76rem;
+    line-height: 0.9rem;
+  }
+  &-extra-small {
+    font-size: 0.6rem;
+  }
+  &-white {
+    color: $button-text-color !important;
+  }
+  &-muted {
+    color: $muted-color !important;
+  }
+  &-semi-muted {
+    color: $secondary-color !important;
+  }
+}
+
+.font-weight-medium {
+  font-weight: 500;
+}
+
+.font-weight-semibold {
+  font-weight: 600;
+}
+
+.separator {
+  border-bottom: 1px solid var(--separator-color);
+}
+
+.border {
+  border: 1px solid var(--separator-color-light) !important;
+  &-top {
+    border-top: 1px solid var(--separator-color-light) !important;
+  }
+  &-right {
+    border-right: 1px solid var(--separator-color-light) !important;
+  }
+  &-bottom {
+    border-bottom: 1px solid var(--separator-color-light) !important;
+  }
+  &-left {
+    border-left: 1px solid var(--separator-color-light) !important;
+  }
+  &-primary {
+    border-color: var(--primary) !important;
+  }
+  &-secondary {
+    border-color: var(--secondary) !important;
+  }
+}
+
+.img-thumbnail {
+  border-radius: $border-radius;
+  padding: 0;
+  border: initial;
+}
+.img-fluid {
+  width: 100%;
+}
+.btn {
+  font-size: 13px;
+}
+.dropdown-menu {
+  font-size: 0.8rem;
+  border-radius: $border-radius;
+  background: var(--input-background);
+  border-color: var(--primary-15);
+  .dropdown-item {
+    padding: 0.5rem 1.25rem;
+    color: var(--primary);
+    &:hover,
+    &:focus {
+      background-color: var(--background-color);
+      color: var(--primary);
+    }
+
+    &.active,
+    &:active {
+      color: var(--primary);
+      text-decoration: none;
+      background-color: var(--theme-color-1);
+    }
+  }
+  .dropdown-divider {
+    border-color: var(--separator-color);
+  }
+}
 
 main {
   margin-top: get($header-config, desktop, default, height);
@@ -7,6 +110,9 @@ main {
 
 @media (min-width: get($grid-breakpoints, sm)) {
   main {
-    margin-left: get($aside-config, desktop, default, width);
+    margin-left: get($aside-config, desktop, default, width) + get($main-config, desktop, default, margin);
+    margin-top: get($header-config, desktop, default, height) + get($main-config, desktop, default, margin) - 15;
+    margin-right: get($main-config, desktop, default, margin);
+    margin-bottom: get($main-config, desktop, default, margin) - 20;
   }
 }

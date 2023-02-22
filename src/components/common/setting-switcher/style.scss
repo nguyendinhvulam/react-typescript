@@ -1,0 +1,71 @@
+@import "../../../assets/scss/base/config";
+
+.setting-switcher {
+  width: 280px;
+  position: fixed;
+  z-index: 1030;
+  top: 50%;
+  right: 0;
+  background: var(--foreground-color);
+  transform: translate(280px, -50%);
+  padding: 25px;
+  transition: transform 0.4s ease-in-out;
+  @include depth(1);
+
+  &-item {
+    & + .setting-switcher-item {
+      margin-top: 20px;
+    }
+  }
+
+  .theme-button {
+    position: absolute;
+    left: -32px;
+    background: var(--foreground-color);
+    padding: 13px 7px 13px 7px;
+    border-radius: 4px;
+    color: $primary-color;
+    box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.04);
+    font-size: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--theme-color-1);
+    cursor: pointer;
+  }
+
+  .theme-color {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    grid-gap: 10px;
+
+    &-item {
+      display: block;
+      width: 24px;
+      height: 24px;
+      border-radius: 20px;
+      margin: auto;
+      transition: all 0.25s;
+      cursor: pointer;
+
+      &.active,
+      &:hover {
+        background: var(--foreground-color);
+      }
+    }
+  }
+
+  @each $key, $value in $theme-color {
+    .theme-color-#{$key} {
+      border: 3px solid $value;
+      background: $value;
+    }
+  }
+
+  &.shown {
+    transform: translate(0, calc(-50% + 0.5px));
+  }
+
+  &.hidden {
+    transform: translate(280px, -50%);
+  }
+}

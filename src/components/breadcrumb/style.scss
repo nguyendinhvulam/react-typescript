@@ -1,0 +1,18 @@
+@import "../../assets/scss/base/config";
+
+.breadcrumb-container {
+  .breadcrumb {
+    @include respond-below(md) {
+      padding: 0;
+    }
+  }
+}
+
+.breadcrumb {
+  background-color: transparent;
+  margin-bottom: 8px;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: "|";
+}

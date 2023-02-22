@@ -5,11 +5,12 @@ import reportWebVitals from './reportWebVitals'
 
 import { IntlProvider } from 'react-intl'
 import { Provider } from 'react-redux'
-import { defaultLocale } from './constants'
+import { defaultLocale, isSettingSwitcherActive } from 'src/constants'
 import AppLocale from './lang'
 import store from './redux/Store'
 
 import Loading from 'src/components/loading'
+import SettingSwitcher from 'src/components/common/setting-switcher'
 import './assets/scss/style.scss'
 import AsideContextProvider from './context/AsideContext'
 
@@ -49,6 +50,7 @@ root.render(
         >
           <AsideContextProvider>
             <Suspense fallback={<Loading />}>
+              {isSettingSwitcherActive && <SettingSwitcher />}
               <Routes>
                 <Route path="/" element={<App />}>
 

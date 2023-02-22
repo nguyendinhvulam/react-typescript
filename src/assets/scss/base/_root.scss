@@ -1,0 +1,30 @@
+:root {
+  --theme-color-1: #{$theme-color-1};
+  --theme-color-2: #{$theme-color-2};
+  --theme-color-3: #{$theme-color-3};
+  --theme-color-4: #{$theme-color-4};
+  --theme-color-5: #{$theme-color-5};
+  --theme-color-6: #{$theme-color-6};
+
+  --theme-gradient-color: linear-gradient(to right top, #{$gradient-color-2}, #{$gradient-color-3}, #{$gradient-color-1});
+
+  --primary: #{$primary-color};
+  --secondary: #{$secondary-color};
+  --muted-color: #{$muted-color};
+  --button-text-color: #{$button-text-color};
+
+  --separator-color-light: #{$separator-color-light};
+  --separator-color: #{$separator-color};
+  --background-color: #{$background-color};
+  --foreground-color: #{$foreground-color};
+  --input-background: #{$input-background};
+
+  --dark-btn-background: #{$dark-btn-background};
+  --light-btn-background: #{$light-btn-background};
+
+  --selection-color: #{lighten($theme-color-3, 20%)};
+
+  --primary-15: #{rgba($primary-color, 0.15)};
+  --theme-color-1-20: #{rgba($theme-color-1, 0.2)};
+  --primary-lighten-30: #{lighten($primary-color, 30%)};
+}

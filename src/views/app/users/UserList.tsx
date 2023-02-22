@@ -18,7 +18,7 @@ const UserList = () => {
       const { data }: any = result
       setUsersList(data)
     }).catch(error => {
-      console.log('An Error Occured')
+      throw new Error(error)
     })
   }
 
@@ -27,31 +27,28 @@ const UserList = () => {
   }, [])
 
   return (
-    <div>
-      <h1>User List</h1>
-      <Table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            usersList.map((item: User, idx) => (
-              <tr>
-                <th scope="row">{idx + 1}</th>
-                <td><Link to='1'>{item?.title}</Link></td>
-                <td>{item?.slug}</td>
-                <td>{item?.excerpt}</td>
-              </tr>
-            ))
-          }
-        </tbody>
-      </Table>
-    </div>
+    <Table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Username</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          usersList.map((item: User, idx) => (
+            <tr key={item?.slug}>
+              <th scope="row">{idx + 1}</th>
+              <td><Link to='1'>{item?.title}</Link></td>
+              <td>{item?.slug}</td>
+              <td>{item?.excerpt}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </Table>
   )
 }
 

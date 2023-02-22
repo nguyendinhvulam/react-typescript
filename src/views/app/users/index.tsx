@@ -1,13 +1,15 @@
 import { Link, Outlet } from "react-router-dom"
+import Breadcrumb from "src/components/breadcrumb"
 
 const Users = () => {
   return (
-    <div>
+    <section className='users-section'>
+      <Breadcrumb heading />
       <nav>
         <Link to="new">New</Link>
       </nav>
       <Outlet />
-    </div>
+    </section>
   )
 }
 

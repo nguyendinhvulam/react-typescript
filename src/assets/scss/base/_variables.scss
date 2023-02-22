@@ -94,6 +94,17 @@ $aside-config: (
   ),
 ) !default;
 
+$main-config: (
+  desktop: (
+    default: (
+      margin: 60px
+    ),
+  ),
+  tablet-and-mobile: (
+    default: (),
+  ),
+) !default;
+
 // Spacing
 //
 $spacer: 1rem !default;

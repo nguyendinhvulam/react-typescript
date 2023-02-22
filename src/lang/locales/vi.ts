@@ -1,4 +1,9 @@
-module.exports = {
+export default {
+  'nav.home': 'Trang chủ',
+  'nav.dashboard': 'Tổng quan',
+  'nav.ui': 'UI',
+  'nav.icons': 'Icons',
+
   'aside.home': 'Trang chủ',
   'aside.dashboards': 'Tổng quan',
   'aside.ui': 'UI',
