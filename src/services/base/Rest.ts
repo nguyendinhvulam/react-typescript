@@ -1,5 +1,6 @@
 import { deepmerge } from "deepmerge-ts"
 import urlcat from 'urlcat'
+import { Config, ContentType } from "./Contants"
 
 type Options = {
   baseUrl: string,
@@ -8,15 +9,6 @@ type Options = {
   authorizationHeader: string,
   authorizationMethod: string
 }
-
-export enum ContentType {
-  Json = "application/json",
-  Multipart = "multipart/form-data",
-  FormUrlEncoded = "application/x-www-form-urlencoded"
-}
-
-export const acceptKey = "Accept"
-export const contentTypeKey = "Content-Type"
 
 const buildQueryString = <P extends Record<string, any>>(prefix: string, resource: string | [string, P]) => {
   const endpoint = Array.isArray(resource) ? resource[0] : resource
@@ -73,21 +65,21 @@ export const createAPI = (initOpts: Partial<Options> = {}) => {
 
     const headers = new Headers(requestInit?.headers)
 
-    if (!headers.has(acceptKey)) {
-      headers.set(acceptKey, ContentType.Json)
+    if (!headers.has(Config.AcceptKey)) {
+      headers.set(Config.AcceptKey, ContentType.Json)
     }
 
-    if (!headers.has(contentTypeKey)) {
-      headers.set(contentTypeKey, ContentType.Json)
+    if (!headers.has(Config.ContentTypeKey)) {
+      headers.set(Config.ContentTypeKey, ContentType.Json)
     }
 
     const body = getBody(
-      headers.get(contentTypeKey) || undefined,
+      headers.get(Config.ContentTypeKey) || undefined,
       requestInit?.body as any
     )
 
-    if (headers.get(contentTypeKey) === ContentType.Multipart) {
-      headers.delete(contentTypeKey)
+    if (headers.get(Config.ContentTypeKey) === ContentType.Multipart) {
+      headers.delete(Config.ContentTypeKey)
     }
 
     return new Promise<undefined>((resolve, reject) =>
@@ -194,7 +186,7 @@ export const createAPI = (initOpts: Partial<Options> = {}) => {
           options,
           {
             headers: {
-              [contentTypeKey]: ContentType.Multipart
+              [Config.ContentTypeKey]: ContentType.Multipart
             }
           }
         )

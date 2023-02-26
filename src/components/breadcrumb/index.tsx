@@ -21,7 +21,7 @@ const BreadcrumbContainer = ({ heading }: any) => {
   }
 
   const BreadcrumbHeading = () => {
-    const uri = pathSplit[pathSplit.length - 1] ? pathSplit[pathSplit.length - 1] : 'dashboard'
+    const uri = pathSplit[pathSplit.length - 1]
     return <h1 className='d-inline-block me-5'>{uri && <IntlMessages id={`nav.${uri}`} />}</h1>
   }
 

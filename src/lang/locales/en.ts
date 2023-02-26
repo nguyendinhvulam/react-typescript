@@ -3,6 +3,7 @@ export default {
   'nav.dashboard': 'Dashboard',
   'nav.ui': 'UI',
   'nav.icons': 'Icons',
+  'nav.users': 'Users',
 
 
   'aside.home': 'Home',

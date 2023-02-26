@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom"
 import Breadcrumb from "src/components/breadcrumb"
+import "./style.scss"
 
 const UI = () => {
   return (

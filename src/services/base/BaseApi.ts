@@ -1,8 +1,5 @@
+import { Config, ContentType } from "./Contants"
 import { createAPI } from "./Rest"
-
-export const config = {
-  apiEndpoint: 'https://laravel.local:8443/api'
-}
 
 export const getAccessToken = () => {
   const storage = sessionStorage.getItem(
@@ -14,23 +11,21 @@ export const getAccessToken = () => {
   return JSON.parse(storage)["access_token"]
 }
 
-/* Creating a public API that is used to make requests to the backend. */
 export const publicApi = createAPI({
-  baseUrl: config.apiEndpoint,
+  baseUrl: Config.ApiEndpoint,
   requestInit: {
     headers: {
-      "Content-Type": "application/json",
+      [Config.ContentTypeKey]: ContentType.Json,
     },
   },
 })
 
-/* Creating a private API that is used to make requests to the backend. */
 export const privateApi = createAPI({
-  baseUrl: config.apiEndpoint,
+  baseUrl: Config.ApiEndpoint,
   acquireAccessToken: getAccessToken,
   requestInit: {
     headers: {
-      "Content-Type": "application/json",
+      [Config.ContentTypeKey]: ContentType.Json,
     },
   },
 })

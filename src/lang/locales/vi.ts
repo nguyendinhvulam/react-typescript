@@ -2,7 +2,8 @@ export default {
   'nav.home': 'Trang chủ',
   'nav.dashboard': 'Tổng quan',
   'nav.ui': 'UI',
-  'nav.icons': 'Icons',
+  'nav.icons': 'Biểu tượng',
+  'nav.users': 'Người dùng',
 
   'aside.home': 'Trang chủ',
   'aside.dashboards': 'Tổng quan',

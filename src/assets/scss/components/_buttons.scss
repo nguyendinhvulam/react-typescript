@@ -6,6 +6,8 @@
 .btn {
   // Reset outline
   outline: none !important;
+  display: inline-flex;
+  align-items: center;
 
   // Reset focus shadow
   &:not(.btn-shadow):not(.shadow):not(.shadow-sm):not(.shadow-lg) {

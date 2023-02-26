@@ -2849,20 +2849,6 @@ const globe = () => {
     </svg>
   )
 }
-const book = () => {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
-      viewBox="0 0 24 24" version="1.1">
-      <g stroke="none" strokeWidth="1" fill="none">
-        <polygon points="0 0 24 0 24 24 0 24"></polygon>
-        <mask fill="white">
-          <use xlinkHref="#path-1"></use>
-        </mask>
-        <use fill="currentColor" xlinkHref="#path-1"></use>
-      </g>
-    </svg>
-  )
-}
 const clock = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
@@ -10265,7 +10251,6 @@ export default {
   "box": box(),
   "bath": bath(),
   "globe": globe(),
-  "book": book(),
   "clock": clock(),
   "lamp1": lamp1(),
   "mailbox": mailbox(),
