@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { FormGroup, Input, Label } from 'reactstrap'
 import { colors, isMenuHidden, menuHiddenStorageKey, themeColorStorageKey } from 'src/constants'
+import svg from "src/components/svg"
 import './style.scss'
 
 const SettingSwitcher = () => {
@@ -90,7 +91,7 @@ const SettingSwitcher = () => {
         className="theme-button"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <i className="simple-icon-magic-wand" />
+        {svg['brush1' as keyof typeof svg]}
       </div>
     </div>
   )
